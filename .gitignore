@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+*.pyo
+._*
+.DS_Store
+*.token
+*.key
+.env
+venv/
+.venv/

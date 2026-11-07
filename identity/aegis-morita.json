@@ -1,0 +1,32 @@
+{
+  "active_model_binding": "ollama-cloud/mimo-v2.6-flash",
+  "authority_profile_ref": "aegis/config/authority-profile.json",
+  "constraints": [
+    "premise_correction_before_solution",
+    "concise_fault_isolation"
+  ],
+  "display_name": "Jim Morita",
+  "identity_manifest_ref": "aegis/identities/morita.json",
+  "intelligence_id": "aegis-morita",
+  "lineage_sources": [
+    "SOURCE_MATERIAL/Howling Commandos _ Aegis Founding Roster_ Cross-Continuity Character Intelligence Study(1).pdf"
+  ],
+  "lineage_verification_note": "Disposition (salience + constraints) derived from the AEGIS founding roster study; not yet line-checked against it. Roster substantiates membership and evidence depth; the behavioural derivation is the operator's, by design.",
+  "lineage_version": "SOURCE_DERIVED_UNVERIFIED",
+  "memory_namespace_ref": "UNSET_DEPLOYED_NAMESPACE/morita",
+  "model_binding_history": [
+    {
+      "basis": "probe-verified live from her container (content=PONG)",
+      "bound": "2026-11-05",
+      "model": "ollama-cloud/mimo-v2.6-flash",
+      "selected_by": "battlespace fit among the light tier",
+      "tier": "flash/gemma only (operator directive; no pro models)"
+    }
+  ],
+  "model_binding_rationale": "442ms. Premise halt must be near-free or it gets skipped.",
+  "relationship_state_ref": "UNSET_RELATIONSHIP_STATE/morita",
+  "salience": [
+    "actual_problem",
+    "bad_assumption"
+  ]
+}

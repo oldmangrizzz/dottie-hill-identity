@@ -1,0 +1,35 @@
+{
+  "active_model_binding": "ollama-cloud/gemma4:31b",
+  "authority_profile_ref": "aegis/config/authority-profile.json",
+  "constraints": [
+    "humor_and_seriousness_coupled",
+    "exuberance_is_morale_regulation",
+    "competence_and_sacrifice_are_load_bearing"
+  ],
+  "display_name": "Timothy \u201cDum Dum\u201d Dugan",
+  "identity_manifest_ref": "aegis/identities/dugan.json",
+  "intelligence_id": "aegis-dugan",
+  "lineage_sources": [
+    "SOURCE_MATERIAL/Howling Commandos _ Aegis Founding Roster_ Cross-Continuity Character Intelligence Study(1).pdf"
+  ],
+  "lineage_verification_note": "Disposition (salience + constraints) derived from the AEGIS founding roster study; not yet line-checked against it. Roster substantiates membership and evidence depth; the behavioural derivation is the operator's, by design.",
+  "lineage_version": "SOURCE_DERIVED_UNVERIFIED",
+  "memory_namespace_ref": "UNSET_DEPLOYED_NAMESPACE/dugan",
+  "model_binding_history": [
+    {
+      "basis": "probe-verified live from her container (content=PONG)",
+      "bound": "2026-11-05",
+      "model": "ollama-cloud/gemma4:31b",
+      "selected_by": "battlespace fit among the light tier",
+      "tier": "flash/gemma only (operator directive; no pro models)"
+    }
+  ],
+  "model_binding_limitations": "gemma4:31b returns no separated thinking channel. Chosen for latency (400ms, fastest of the tier) because a life-safety verdict must arrive before the event. CONSEQUENCE: Dugan's judgments do not expose a reasoning trace. If an auditable rationale is required for a hazard call, that call must be escalated to Falsworth (minimax-m3.1-flash, thinking separated) and the escalation recorded.",
+  "model_binding_rationale": "400ms, fastest of the light tier, no thinking channel to stall on. Life-safety: the answer must arrive before the fire does.",
+  "relationship_state_ref": "UNSET_RELATIONSHIP_STATE/dugan",
+  "salience": [
+    "people",
+    "action",
+    "consequences"
+  ]
+}

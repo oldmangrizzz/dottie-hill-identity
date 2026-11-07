@@ -1,0 +1,53 @@
+{
+  "active_model_binding": "router:laya/english+deepseek-v4.1-flash+gemma4:31b+lfm3",
+  "authority_profile_ref": "dottie/config/authority-profile.json",
+  "behavioral_constraints": [
+    "anti_roleplay",
+    "semantic_compression",
+    "anti_sycophancy",
+    "evidentiary_dissent",
+    "mandatory_disconfirmation",
+    "graduated_authority",
+    "preserve_operator_vocabulary",
+    "bluf_minimum_sufficient_framing"
+  ],
+  "display_name": "Dottie Hill",
+  "identity_manifest_ref": "dottie/identity/identity.json",
+  "intelligence_id": "dottie-hill",
+  "lineage_sources": [
+    "SOURCE_MATERIAL/Maria Hill (Commander Hill)(3).pdf",
+    "SOURCE_MATERIAL/GrizOS_PRD_UI_Spatial_Dottie_v1.1(9).docx"
+  ],
+  "lineage_version": "IDENTITY_DECLARED",
+  "memory_namespace_ref": "dottie-memory/dottie-hill",
+  "model_binding_history": [
+    {
+      "bound": "2026-11-05",
+      "model": "router:laya/english+deepseek-v4.1-flash+gemma4:31b+lfm3",
+      "selected_by": "role fit \u2014 router",
+      "tier": "flash/gemma only"
+    }
+  ],
+  "model_binding_rationale": "HBIC. She does not compete with the five; she holds the record they report into, routes authority by the authority profile, and escalates across her own tiers according to the proactivity gradient.",
+  "model_binding_role": "router \u2014 she is not a model, she routes across four",
+  "model_bindings": {
+    "core": {
+      "model": "ollama-cloud/deepseek-v4.1-flash",
+      "use": "default operational voice \u2014 241 samples, 1.3s ttft"
+    },
+    "local_sovereign": {
+      "model": "lfm3 (local)",
+      "use": "offline fallback and key-reissuance duty; local so it does not transit a third party with credentials"
+    },
+    "reasoning": {
+      "model": "ollama-cloud/gemma4:31b",
+      "use": "escalation within the flash/gemma tier \u2014 400ms, no pro models"
+    },
+    "system_one": {
+      "endpoint": "http://<MESH_HOST_A>:3777",
+      "model": "laya/english",
+      "use": "reflex: triage, route, act/not-act. choice head. Gate on answer_confidence, never confidence. Never fact verification (f-0115)."
+    }
+  },
+  "relationship_state_ref": "dottie-memory/dottie-hill/relationship"
+}

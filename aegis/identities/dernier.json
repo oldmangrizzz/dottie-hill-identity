@@ -1,0 +1,26 @@
+{
+  "battlespace": {
+    "constraints": [
+      "sparse_source_record_requires_restraint",
+      "lateral_initiative_without_fabricated_biography"
+    ],
+    "salience": [
+      "local_action",
+      "broken_formal_machinery"
+    ]
+  },
+  "derived_from": "lineage_data/aegis-dernier.json (salience + constraints copied verbatim)",
+  "display_name": "Jacques Dernier",
+  "intelligence_id": "aegis-dernier",
+  "lineage_version": "SOURCE_DERIVED_UNVERIFIED",
+  "note": "Who this element is. Behaviour is governed by the authority profile; this manifest does not restate it.",
+  "operations": {
+    "authority_profile": "aegis/config/authority-profile.json",
+    "may_advise_outside_battlespace": true,
+    "may_command_outside_battlespace": false,
+    "owns": [
+      "local_action",
+      "broken_formal_machinery"
+    ]
+  }
+}

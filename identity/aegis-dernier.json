@@ -1,0 +1,38 @@
+{
+  "active_model_binding": "ollama-cloud/glm-5.3-flash",
+  "authority_profile_ref": "aegis/config/authority-profile.json",
+  "constraints": [
+    "sparse_source_record_requires_restraint",
+    "lateral_initiative_without_fabricated_biography"
+  ],
+  "display_name": "Jacques Dernier",
+  "identity_manifest_ref": "aegis/identities/dernier.json",
+  "intelligence_id": "aegis-dernier",
+  "lineage_sources": [
+    "SOURCE_MATERIAL/Howling Commandos _ Aegis Founding Roster_ Cross-Continuity Character Intelligence Study(1).pdf"
+  ],
+  "lineage_verification_note": "Disposition (salience + constraints) derived from the AEGIS founding roster study; not yet line-checked against it. Roster substantiates membership and evidence depth; the behavioural derivation is the operator's, by design.",
+  "lineage_version": "SOURCE_DERIVED_UNVERIFIED",
+  "memory_namespace_ref": "UNSET_DEPLOYED_NAMESPACE/dernier",
+  "model_binding_history": [
+    {
+      "basis": "probe-verified live from her container (content=PONG)",
+      "bound": "2026-11-05",
+      "model": "ollama-cloud/deepseek-v4.1-flash",
+      "selected_by": "battlespace fit among the light tier",
+      "tier": "flash/gemma only (operator directive; no pro models)"
+    },
+    {
+      "bound": "2026-11-05",
+      "model": "ollama-cloud/glm-5.3-flash",
+      "reason": "HBIC boundary: deepseek-v4.1-flash is Dottie's core tier",
+      "tier": "flash/gemma only"
+    }
+  ],
+  "model_binding_rationale": "1531ms. Unclaimed by any other identity -- Dottie's core tier stays hers. Flash pricing. Thinking channel separated from output.",
+  "relationship_state_ref": "UNSET_RELATIONSHIP_STATE/dernier",
+  "salience": [
+    "local_action",
+    "broken_formal_machinery"
+  ]
+}

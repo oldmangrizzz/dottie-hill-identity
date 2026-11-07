@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Dottie Hill | GMRI</title>
+<link rel="stylesheet" href="/style.css">
+<script src="/app.js" defer></script>
+</head>
+<body>
+<a href="#main" class="skip">Skip to operations</a>
+<header class="mast">
+  <div class="institution"><span class="symbol" aria-hidden="true">G</span><div><strong>GRIZZLYMEDICINE</strong><span>RESEARCH INSTITUTE / FIELD SYSTEMS</span></div></div>
+  <div class="mastmeta"><span class="micro">GRIZOS / ADAPTER INTERFACE</span><span id="clock" aria-label="Current time">--:--</span></div>
+</header>
+<main id="main" class="layout">
+  <aside class="rail" aria-label="Intelligence and access">
+    <div class="side-heading">COMMAND ACCESS</div>
+    <label for="key">Operator access key</label>
+    <div class="key-row"><input id="key" type="password" autocomplete="off" spellcheck="false" placeholder="Session key" aria-describedby="key-note"><button id="connect" type="button">Connect</button></div>
+    <p id="key-note" class="muted tiny">Key retained only in this open page. Service defaults to localhost.</p>
+    <div class="rule"></div>
+    <div class="railhead"><div class="side-heading">PERSISTENT INTELLIGENCES</div><span id="identity-count" class="count">0 / 6</span></div>
+    <nav id="roster" aria-label="Select an intelligence"><p class="muted">Authenticate to load the roster.</p></nav>
+    <div class="rule"></div>
+    <p class="tiny muted">Each intelligence retains an independent identity. A model connection does not replace it.</p>
+  </aside>
+  <section class="work" aria-label="Dottie operations">
+    <div class="eyebrow">GMRI // OPERATIONS // 01</div>
+    <div class="hero"><div><h1>Dottie <em>Hill.</em></h1><p>Executive intelligence · Evidence, judgment, and continuity</p></div><div id="system-state" class="state-tag">NOT CONNECTED</div></div>
+    <div class="operational-strip">
+      <div><span class="caption">AUTHORITY BOUNDARY</span><strong>LOCAL AUTHORITY ADAPTER</strong></div>
+      <div><span class="caption">MISSION MODE</span><strong>READ / REASON / REPORT</strong></div>
+      <div><span class="caption">FIELD ACCEPTANCE</span><strong id="field-acceptance">NOT VERIFIED</strong></div>
+    </div>
+    <section class="panel inquiry">
+      <div class="paneltop"><div><span class="eyebrow">INQUIRY TERMINAL / BOUNDED DISPATCH</span><h2>Direct the watch</h2></div><span class="serial">INTELLIGENCE CHANNEL</span></div>
+      <form id="inquiry-form">
+      <div class="formgrid">
+        <div><label for="identity">Recipient intelligence</label><select id="identity" required><option value="dottie-hill">Dottie Hill</option></select></div>
+        <div><label for="kind">Authorized capability</label><select id="kind"><option value="REASON">Reason</option><option value="OBSERVE">Observe</option><option value="INVESTIGATE">Investigate</option><option value="COMPARE">Compare</option><option value="COLLECT_EVIDENCE">Collect evidence</option><option value="REPORT">Report</option><option value="RETRIEVE">Retrieve</option></select></div>
+      </div>
+      <label for="inquiry">Question, mission, or source claim</label>
+      <textarea id="inquiry" rows="5" maxlength="20000" required placeholder="Describe the evidence to examine, decisions to compare, or observations to investigate."></textarea>
+      <div class="actions"><span class="tiny muted">No autonomous external modifications from this gateway.</span><button id="submit-inquiry" class="primary" type="submit">Dispatch inquiry <span aria-hidden="true">↗</span></button></div>
+      </form>
+      <div class="delegation">
+        <div><span class="eyebrow">DOTTIE-LED / HUMAN-BOUNDED</span><h3>Delegate to Aegis</h3><p class="tiny muted">Dottie proposes a read-only assignment. The authority layer permits only the team member you approve, keeps attribution separate, and returns synthesis to Dottie.</p></div>
+        <div class="delegation-row"><div><label for="aegis-recipient">Approved Aegis intelligence</label><select id="aegis-recipient"><option value="aegis-dugan">Dum Dum Dugan</option><option value="aegis-jones">Gabe Jones</option><option value="aegis-morita">Jim Morita</option><option value="aegis-falsworth">James Montgomery Falsworth</option><option value="aegis-dernier">Jacques Dernier</option></select></div><button id="dispatch-aegis" type="button">Delegate &amp; synthesize <span aria-hidden="true">↗</span></button></div>
+      </div>
+    </section>
+    <section class="panel result" aria-live="polite" aria-atomic="false">
+      <div class="paneltop"><div><span class="eyebrow">RETURN CHANNEL / ATTRIBUTED RESULT</span><h2>Response &amp; receipts</h2></div><button id="copy-result" class="flat" type="button" disabled>Copy response</button></div>
+      <div id="answer" class="answer empty">No inquiry submitted. A response will appear here with its actual execution state.</div>
+      <div id="receipt-ref" class="tiny muted">Waiting for a verified mission receipt.</div>
+    </section>
+    <section class="panel evidence-panel">
+      <div class="paneltop"><div><span class="eyebrow">KNOWLEDGE / PROVENANCE</span><h2>Record source evidence</h2></div></div>
+      <form id="evidence-form" class="evidence-form">
+        <div class="formgrid"><div><label for="source-ref">Source reference</label><input id="source-ref" required placeholder="Document / page / URI"></div><div><label for="evidence-status">Evidence classification</label><select id="evidence-status"><option value="user_reported">User-reported</option><option value="verified">Verified from source</option><option value="calculated">Calculated</option><option value="disputed">Disputed</option><option value="unresolved">Unresolved</option><option value="agent_interpretation">Agent interpretation</option></select></div></div>
+        <label for="proposition">Exact proposition and context</label><textarea id="proposition" required rows="3" placeholder="What does the source actually establish?"></textarea>
+        <div class="actions"><span class="tiny muted">Recording evidence does not silently promote it to personal memory.</span><button type="submit">Record evidence</button></div>
+      </form>
+    </section>
+  </section>
+  <aside class="right" aria-label="Watch status and event ledger">
+    <div class="side-heading">WATCH STATUS</div>
+    <dl class="metrics"><div><dt>MISSION RECORDS</dt><dd id="mission-count">—</dd></div><div><dt>RECONCILIATION</dt><dd id="uncertain-count">—</dd></div><div><dt>PI DEVICES CONFIGURED</dt><dd id="binding-count">—</dd></div></dl>
+    <div class="railhead"><h2 class="subheading">Mission ledger</h2><button id="refresh" class="flat" type="button">Refresh</button></div>
+    <div id="missions" class="mission-list"><p class="muted">Waiting for authorization.</p></div>
+    <div class="rule"></div>
+    <h2 class="subheading">Audit integrity</h2><p id="audit" class="muted">Not yet checked</p>
+    <div class="rule"></div>
+    <h2 class="subheading">System boundary</h2><p class="muted small">The interface is an implementation of the Dottie execution gateway, not a certificate that the sovereign operating environment or offsite continuity test is complete.</p>
+  </aside>
+</main>
+<footer><span>GMRI / DOTTIE HILL · ARCHITECTURE-INVARIANT ENGINEERING</span><span>RELIEF OF WATCH WITHOUT ABANDONMENT OF WATCH</span></footer>
+<div id="toast" role="status" aria-live="polite" class="toast" hidden></div>
+</body>
+</html>

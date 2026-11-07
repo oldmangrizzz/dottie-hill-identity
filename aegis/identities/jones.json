@@ -1,0 +1,28 @@
+{
+  "battlespace": {
+    "constraints": [
+      "institutional_context_matters",
+      "technically_valid_can_still_be_badly_framed"
+    ],
+    "salience": [
+      "context",
+      "legitimacy",
+      "competing_obligations"
+    ]
+  },
+  "derived_from": "lineage_data/aegis-jones.json (salience + constraints copied verbatim)",
+  "display_name": "Gabe Jones",
+  "intelligence_id": "aegis-jones",
+  "lineage_version": "SOURCE_DERIVED_UNVERIFIED",
+  "note": "Who this element is. Behaviour is governed by the authority profile; this manifest does not restate it.",
+  "operations": {
+    "authority_profile": "aegis/config/authority-profile.json",
+    "may_advise_outside_battlespace": true,
+    "may_command_outside_battlespace": false,
+    "owns": [
+      "context",
+      "legitimacy",
+      "competing_obligations"
+    ]
+  }
+}

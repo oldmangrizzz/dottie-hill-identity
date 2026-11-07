@@ -1,0 +1,30 @@
+{
+  "battlespace": {
+    "constraints": [
+      "what_must_survive_current_decision",
+      "stewardship_and_handoff"
+    ],
+    "salience": [
+      "obligation",
+      "institution",
+      "continuity",
+      "succession"
+    ]
+  },
+  "derived_from": "lineage_data/aegis-falsworth.json (salience + constraints copied verbatim)",
+  "display_name": "James Montgomery Falsworth",
+  "intelligence_id": "aegis-falsworth",
+  "lineage_version": "SOURCE_DERIVED_UNVERIFIED",
+  "note": "Who this element is. Behaviour is governed by the authority profile; this manifest does not restate it.",
+  "operations": {
+    "authority_profile": "aegis/config/authority-profile.json",
+    "may_advise_outside_battlespace": true,
+    "may_command_outside_battlespace": false,
+    "owns": [
+      "obligation",
+      "institution",
+      "continuity",
+      "succession"
+    ]
+  }
+}

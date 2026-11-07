@@ -1,0 +1,143 @@
+# dottie/model_slots.toml — the model binding table. ONE file, no code change to swap a model.
+#
+# Read by `dottie/models.py`. Precedence, per field:  process env  >  this file  >  defaults()
+# Env stem per slot:  dottie.system1 -> DOTTIE_MODEL_DOTTIE_SYSTEM1
+#                     aegis.dugan   -> DOTTIE_MODEL_AEGIS_DUGAN
+# One field at a time:  DOTTIE_MODEL_DOTTIE_SYSTEM1_MODEL=another-tag
+# Fields: provider, model, base_url, api_key_env, timeout_seconds, max_tokens, tier, enabled
+#
+# PROVIDERS:  openai (any OpenAI-wire runtime, tier local OR cloud) | ollama-local |
+#             laya (tier reflex) | ollama-cloud (tier cloud)
+#
+# TIER 1 IS llama.cpp, NOT Ollama. `dottie-llama.service` on the GPU container serves the same GGUF over
+# the OpenAI wire at 127.0.0.1:8488, on the RX 470 (Vulkan0, RADV POLARIS10), verified with
+# the device node held open by the process and answers through Dottie's own cognition path.
+# Ollama remains installed and running; switching back is three lines and no restart.
+# ONE OLLAMA CLOUD ACCOUNT serves tier 3 and all five AEGIS agents: one base_url, one
+# credential, named here as an env var only. NO SECRET IS WRITTEN IN THIS FILE.
+#
+# THE AEGIS RULE, enforced in `Registry.validate()` and proven by tests: every aegis.* slot
+# is CLOUD-ONLY. A binding whose tier is not "cloud" is rejected with code
+# `aegis_cloud_only`. The agents do not share Dottie's local pair.
+#
+# EVERY SLOT BELOW NAMES A REAL MODEL ID. No slot reads as an unanswered question. The single
+# bracketed note left in this file is an ARTIFACT dependency (a tag not yet pulled), not a
+# decision.
+#
+# Nothing here is a promise about what is installed. A tag in this file is a REQUEST;
+# `python3 -m dottie.models --probe` is the observation. Never report a model as available
+# because this file names it.
+
+# ---------------------------------------------------------------------------- DOTTIE ------
+# TIER 1 AND TIER 2 ARE THE LOCAL PAIR: a local model (plain completion) plus LAYA (typed
+# verdicts, System-1 reflex over a System-2 deliberation state). Both live where Dottie's
+# process lives — CT 115 — so no path below names a workstation.
+
+[slot."dottie.system1"]
+# TIER 1 — llama.cpp's Vulkan server. Ollama stays installed; switching back is three lines.
+# MEASURED 2026-11-03 (the GPU container): llama-server b12091 -ubuntu-vulkan-x64, Vulkan0 AMD Radeon RX 470
+# (RADV POLARIS10, 4096 MiB), device node held open (/proc/<pid>/fd -> /dev/dri/renderD128,
+# fuser confirms), 220 ms warm. Dottie answered through it: "DOTTIE VIA LLAMA.CPP".
+# Same GGUF the Ollama store held (lfm3:1.7b-q4_K_M) — the RUNTIME changed, not the model.
+# ONE-FIELD ALTERNATE — the llama.cpp Vulkan server (127.0.0.1:8488, keyed) is the
+# measured alternate: provider = "openai", model = "lfm3", base_url = "http://127.0.0.1:8488"
+# OLLAMA ALTERNATE (three fields, no restart):
+#     provider = "openai"
+#     model    = "lfm3:1.7b-q4_K_M"
+#     base_url = "http://127.0.0.1:8488"
+provider = "openai"
+model = "lfm3"
+base_url = "http://127.0.0.1:8488"
+api_key_env = ""
+timeout_seconds = 120.0
+max_tokens = 4096
+tier = "local"
+enabled = true
+
+[slot."dottie.system2"]
+# LAYA is NOT a workstation tool. It runs on the Proxmox host beside Dottie, as
+# `dottie-laya.service`, and speaks HTTP on 127.0.0.1:8473 — measured against the deployed
+# unit. Its wire is `/info` (GET) and `/v1/systemone` (POST) — the same two routes
+# `dottie/adapters.py:LayaAdvisor` already uses, so the binding and the adapter agree instead
+# of inventing a second contract.
+provider = "laya"
+model = "laya-sidecar"
+base_url = "http://127.0.0.1:8473"
+api_key_env = ""
+timeout_seconds = 30.0
+max_tokens = 64
+tier = "reflex"
+enabled = true
+
+# ------------------------------------------------------------------------- TIER 3 ----------
+# Cloud reasoning, tapped only when the local pair is not enough. Same account and same
+# credential as the five agents below. CONFIRMED BY MEASUREMENT, not pending: `--probe` finds
+# this exact id in ollama.com's public tag list (`present: yes`).
+
+[slot."dottie.reasoning"]
+provider = "ollama-cloud"
+model = "deepseek-v4.1-flash"
+base_url = "https://ollama.com"
+api_key_env = "OLLAMA_API_KEY"
+timeout_seconds = 180.0
+max_tokens = 4096
+tier = "cloud"
+enabled = true
+
+# ---------------------------------------------------------------------------- AEGIS ------
+# The five Howling Commandos. Each has its OWN slot and its OWN model id — Dottie coordinates
+# them; they do not share her compute. All five are CLOUD-ONLY by the principal's order.
+#
+# All five resolve to the shared cloud model; per-agent differentiation is a naming choice the
+# principal can make later by editing one line per agent — the mechanism supports it, the
+# default does not invent five different models he never named.
+
+[slot."aegis.dugan"]
+provider = "ollama-cloud"
+model = "deepseek-v4.1-flash"
+base_url = "https://ollama.com"
+api_key_env = "OLLAMA_API_KEY"
+timeout_seconds = 180.0
+max_tokens = 4096
+tier = "cloud"
+enabled = true
+
+[slot."aegis.jones"]
+provider = "ollama-cloud"
+model = "deepseek-v4.1-flash"
+base_url = "https://ollama.com"
+api_key_env = "OLLAMA_API_KEY"
+timeout_seconds = 180.0
+max_tokens = 4096
+tier = "cloud"
+enabled = true
+
+[slot."aegis.morita"]
+provider = "ollama-cloud"
+model = "deepseek-v4.1-flash"
+base_url = "https://ollama.com"
+api_key_env = "OLLAMA_API_KEY"
+timeout_seconds = 180.0
+max_tokens = 4096
+tier = "cloud"
+enabled = true
+
+[slot."aegis.dernier"]
+provider = "ollama-cloud"
+model = "deepseek-v4.1-flash"
+base_url = "https://ollama.com"
+api_key_env = "OLLAMA_API_KEY"
+timeout_seconds = 180.0
+max_tokens = 4096
+tier = "cloud"
+enabled = true
+
+[slot."aegis.falsworth"]
+provider = "ollama-cloud"
+model = "deepseek-v4.1-flash"
+base_url = "https://ollama.com"
+api_key_env = "OLLAMA_API_KEY"
+timeout_seconds = 180.0
+max_tokens = 4096
+tier = "cloud"
+enabled = true
