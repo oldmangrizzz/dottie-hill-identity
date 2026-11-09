@@ -19,9 +19,26 @@
 │   │   ├── core.py            durable scoped ledger
 │   │   ├── server.py          HTTP gateway
 │   │   ├── cognition.py       tier cascade: laya -> local -> cloud
-│   │   ├── executive.py       owns the sequence, not the model
-│   │   ├── continuity.py      identity anchoring and verification
-│   │   ├── models.py          slot registry
+│   │   ├── executive/         owns the sequence, not the model  (I1, I4, I5, I10-I12)
+│   │   │   ├── loop.py        the Executive: plan, escalate, run, resume
+│   │   │   ├── store.py       append-only rows; split, never truncate
+│   │   │   ├── tiers.py       confidence floors and the escalation budget
+│   │   │   ├── tasks.py       Step, Task, parse_plan
+│   │   │   ├── helpers.py     verdict_text, task_summary
+│   │   │   └── common.py      status vocabulary, task-id counter
+│   │   ├── continuity/        identity anchoring and verification  (I2, I4, I8, I9)
+│   │   │   ├── anchor.py      write / load / verify / supersede-by-link
+│   │   │   ├── backends.py    REST and engine stores, one interface
+│   │   │   ├── selftest.py    the restart + binding-change proof
+│   │   │   ├── cli.py         `python3 -m dottie.continuity`
+│   │   │   └── common.py      constants, ContinuityError, helpers
+│   │   ├── models/            slot registry                        (I2, I5, I7, I9)
+│   │   │   ├── registry.py    load and validate the binding table
+│   │   │   ├── config.py      Binding, defaults, env lookup, credential()
+│   │   │   ├── probe.py       reachability only, never a load
+│   │   │   ├── linking.py     descriptor and bind_registry
+│   │   │   ├── coercion.py    value coercion with named errors
+│   │   │   └── cli.py         `python3 -m dottie.models`
 │   │   └── model_slots.toml   the binding table
 │   └── run_executive.py       the loop, operational
 ├── ops/                       operational instruments

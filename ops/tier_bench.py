@@ -1,5 +1,18 @@
 #!/usr/bin/env python3
-"""tier_bench.py -- measure the three tiers on IDENTICAL prompts, latency and cost.
+"""tier_bench.py -- SUPERSEDED by tier_bench2.py for tiers 1-2; kept for tier 3 only.
+
+SUPERSEDED, NOT DELETED — and here is why it is still in the tree. `tier_bench2.py` (written after
+this one) records that this file's LAYA wire was wrong: it sends `kind` where the sidecar requires
+`type`, and every reflex question answered HTTP 500. For tiers 1 and 2, tier_bench2 is the working
+measurement and this file is history — run it only to reproduce the original 500s.
+
+The one thing this file measures that tier_bench2 does NOT is TIER 3: the anonymous
+`POST https://ollama.com/api/chat` call that shows the cloud binding is VALIDATED while
+authentication is a principal action. That measurement is not duplicated anywhere else in `ops/`,
+so deleting this file would silently drop it. It is kept, labelled, and the overlap with
+tier_bench2 is declared here rather than left for a reader to discover.
+
+If tier 3 is re-measured inside tier_bench2, delete this file then; that is the tidy-up, not now.
 
 Dottie's design has three distinct compute populations:
   tier 1  LAYA   -- typed System-1 verdicts over HTTP, loopback, CPU, no model weights on the wire

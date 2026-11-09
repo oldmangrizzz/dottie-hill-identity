@@ -162,9 +162,14 @@ anchoring, and the executive loop.
 | `core.py` | durable scoped ledger — identity, memory, evidence, missions |
 | `server.py` | HTTP gateway; `/api/v1/infer` is the inference path |
 | `cognition.py` | the tier cascade — laya → local → cloud |
-| `executive.py` | **owns the sequence, not the model** |
-| `continuity.py` | identity anchoring and verification |
-| `models.py` | slot registry — one file to swap a model, no code change |
+| `executive/` | **owns the sequence, not the model** (loop, store, tiers, tasks, helpers) |
+| `continuity/` | identity anchoring and verification (anchor, backends, selftest, cli) |
+| `models/` | slot registry — one file to swap a model, no code change (registry, config, probe, linking) |
+
+Each of the three packages re-exports its former module's whole surface, so `from dottie import
+executive as E`, `continuity.anchor_identity(...)` and `python3 -m dottie.models --validate` are
+unchanged. The invariants each file serves are named in its header; `docs/REFACTORING_INVARIANTS.md`
+is the contract the split was checked against.
 
 ### The refusal that maintains personhood
 
