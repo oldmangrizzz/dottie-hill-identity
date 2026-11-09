@@ -4,17 +4,35 @@
 This is the process that makes the loop operational rather than importable. It does one thing
 on startup — continue every ACTIVE task from bytes — and then watches a spool directory for
 new task requests, so an interruption costs the principal nothing but the wall time.
+
+Configuration (invariant I9 — nothing here is a credential; the token is still READ FROM A FILE):
+
+  DOTTIE_RUNTIME_ROOT   where the `dottie` package is imported from
+                        (default /opt/dottie-runtime — the deployed checkout)
+  DOTTIE_MEMORY_TOKEN_FILE
+                        path to the file holding the bearer token
+                        (default /etc/dottie-memory.token; the value is never logged)
+  DOTTIE_MEMORY_URL     the memory service base URL (default http://127.0.0.1:8471)
+  DOTTIE_SPOOL          the task-spool directory (default /var/lib/dottie-executive)
+
+The DEFAULTS are the deployed values, so this process behaves identically on CT 115 whether or
+not the environment says anything. A host that runs the same code somewhere else can now move
+the paths without editing this file.
 """
 import json, os, sys, time
-sys.path.insert(0, "/opt/dottie-runtime")
+
+RUNTIME_ROOT = os.environ.get("DOTTIE_RUNTIME_ROOT") or "/opt/dottie-runtime"
+sys.path.insert(0, RUNTIME_ROOT)
 from dottie import executive as E, cognition, models as M
 
-TOKEN = open("/etc/dottie-memory.token").read().strip()
+TOKEN_FILE = os.environ.get("DOTTIE_MEMORY_TOKEN_FILE") or "/etc/dottie-memory.token"
+TOKEN = open(TOKEN_FILE).read().strip()
 os.environ.setdefault("DOTTIE_MODEL_ALLOW_PLAINTEXT", "127.0.0.1")
-SPOOL = "/var/lib/dottie-executive"
+SPOOL = os.environ.get("DOTTIE_SPOOL") or "/var/lib/dottie-executive"
 os.makedirs(SPOOL, exist_ok=True)
 
-store = E.Store(base_url="http://127.0.0.1:8471", token=TOKEN)
+MEMORY_URL = os.environ.get("DOTTIE_MEMORY_URL") or "http://127.0.0.1:8471"
+store = E.Store(base_url=MEMORY_URL, token=TOKEN)
 reg = M.load()
 def _slot(s):
     b = reg.resolve(s)
